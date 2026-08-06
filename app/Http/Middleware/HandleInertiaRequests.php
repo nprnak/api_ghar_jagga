@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Service;
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -41,6 +43,16 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'siteSettings' => fn () => SiteSetting::query()->first(),
+            'flash' => [
+                'success' => fn () => $request->session()->get('success'),
+                'error' => fn () => $request->session()->get('error'),
+            ],
+            'navigationServices' => fn () => Service::query()
+                ->published()
+                ->ordered()
+                ->get(['id', 'title', 'slug']),
         ];
     }
 }
+
