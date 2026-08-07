@@ -5,8 +5,8 @@
 @source '../js/**/*.{vue,js,ts}';
 
 @theme inline {
-    --font-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
-    --font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
+     --font-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+--font-display: 'Playfair Display', ui-sans-serif, system-ui, sans-serif;
 
     --color-brand-50: #eef3fb;
     --color-brand-100: #d5e2f6;

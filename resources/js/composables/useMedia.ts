@@ -27,20 +27,22 @@ export function mediaUrl(
         return path;
     }
 
+    const normalizedPath = path.trim().replace(/^\/+/, '');
+
     if (path.startsWith('/storage/') || path.startsWith('/images/')) {
         return path;
     }
 
-    if (MISSING_SEED_PATH.test(path)) {
+    if (MISSING_SEED_PATH.test(normalizedPath)) {
         return FALLBACKS[fallback];
     }
 
-    if (STORAGE_DIRS.test(path) || path.startsWith('storage/')) {
-        const normalized = path.replace(/^storage\//, '');
-        return `/storage/${normalized}`;
+    if (STORAGE_DIRS.test(normalizedPath) || normalizedPath.startsWith('storage/')) {
+        const normalized = normalizedPath.replace(/^storage\//, '');
+        return /storage/${normalized};
     }
 
-    return path.startsWith('/') ? path : `/${path}`;
+    return path.startsWith('/') ? path : /${normalizedPath};
 }
 
 export function onImageError(event: Event, fallback: keyof typeof FALLBACKS = 'hero'): void {
